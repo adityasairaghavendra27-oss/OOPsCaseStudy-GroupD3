@@ -5,6 +5,7 @@ Team Members
 Kushal-AM.SC.U4CSE25364
 Gautham-AM.SC.U4CSE25365
 Sagar-AM.SC.U4CSE25303
+Aditya-AM.SC.U4CSE25369
 
 The Car Rental System is designed to simplify the process of renting vehicles for customers and managing rental operations for the service provider. 
 
