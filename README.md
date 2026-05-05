@@ -2,10 +2,10 @@ Car Reantal System
 OOP Case study
 
 Team Members
-Kushal-AM.SC.U4CSE25364
-Gautham-AM.SC.U4CSE25365
-Sagar-AM.SC.U4CSE25303
-Aditya-AM.SC.U4CSE25369
+Kushal-AM.SC.U4CSE25364(Phase-2)
+Gautham-AM.SC.U4CSE25365(Phase-3)
+Sagar-AM.SC.U4CSE25303(Phase-1)
+Aditya-AM.SC.U4CSE25369(Phase-3)
 
 The Car Rental System is designed to simplify the process of renting vehicles for customers and managing rental operations for the service provider. 
 
