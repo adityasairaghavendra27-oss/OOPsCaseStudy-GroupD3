@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -12,154 +13,248 @@ public class Main {
         cars[0].brand = "Toyota";
         cars[0].model = "Corolla";
         cars[0].pricePerDay = 50;
-        cars[0].availabilityStatus = true;
+        cars[0].updateAvailability(true);
 
         cars[1] = new Car();
         cars[1].carID = "C2";
         cars[1].brand = "Honda";
         cars[1].model = "Civic";
         cars[1].pricePerDay = 60;
-        cars[1].availabilityStatus = true;
+        cars[1].updateAvailability(true);
 
         cars[2] = new Car();
         cars[2].carID = "C3";
         cars[2].brand = "Ford";
         cars[2].model = "Focus";
         cars[2].pricePerDay = 55;
-        cars[2].availabilityStatus = true;
+        cars[2].updateAvailability(true);
 
         Customer customer = new Customer();
-        customer.id = "U1";
-        customer.name = "Guest";
+
+        System.out.println("========== CUSTOMER DETAILS ==========");
+
+        System.out.print("Enter Customer ID: ");
+        customer.id = sc.nextLine();
+
+        System.out.print("Enter Customer Name: ");
+        customer.name = sc.nextLine();
+
+        System.out.print("Enter Email: ");
+        customer.email = sc.nextLine();
+
+        System.out.print("Enter Phone Number: ");
+        customer.phoneNumber = sc.nextLine();
+
+        System.out.print("Enter License Number: ");
+        customer.licenseNumber = sc.nextLine();
+
+        Admin admin = new Admin();
+
+        admin.id = "A1";
+        admin.name = "System Admin";
+        admin.email = "admin@gmail.com";
+        admin.adminID = "AD101";
+
+        admin.addCar(cars[0]);
+        admin.manageUsers();
 
         Booking booking = new Booking();
         Payment payment = new Payment();
         RentalRecord record = new RentalRecord();
 
         int choice = 0;
+        int days = 0;
 
-        while (choice != 5) {
+        while (choice != 6) {
 
-            System.out.println("\n--- Car Rental System ---");
-            System.out.println("1. View Cars");
-            System.out.println("2. Book Car");
+            System.out.println("\n=================================");
+            System.out.println("       CAR RENTAL SYSTEM");
+            System.out.println("=================================");
+            System.out.println("1. View Available Cars");
+            System.out.println("2. Book a Car");
             System.out.println("3. Make Payment");
             System.out.println("4. View Rental Record");
-            System.out.println("5. Exit");
-            System.out.print("Enter choice: ");
+            System.out.println("5. Update Booking Date");
+            System.out.println("6. Cancel Booking And Exit");
+            System.out.println("=================================");
+            System.out.print("Enter Your Choice: ");
 
             choice = sc.nextInt();
 
             if (choice == 1) {
 
-                System.out.println("Cars List:");
+                System.out.println("\n------ AVAILABLE CARS ------");
 
                 for (int i = 0; i < cars.length; i++) {
 
-                    if (cars[i] != null) {
+                    if (cars[i].checkAvailability()) {
 
-                        if (cars[i].availabilityStatus == true) {
-                            System.out.println((i + 1) + ". " + cars[i].brand + " " + cars[i].model);
-                        }
-
+                        System.out.println("Car Number : " + (i + 1));
+                        System.out.println("Car ID     : " + cars[i].carID);
+                        System.out.println("Car Name   : " + cars[i].displayCarDetails());
+                        System.out.println("Price/Day  : $" + cars[i].pricePerDay);
+                        System.out.println("----------------------------");
                     }
-
                 }
-
             }
 
             else if (choice == 2) {
 
-                System.out.println("Select car number:");
+                System.out.println("\n------ BOOK A CAR ------");
 
                 for (int i = 0; i < cars.length; i++) {
 
-                    if (cars[i] != null) {
+                    if (cars[i].checkAvailability()) {
 
-                        if (cars[i].availabilityStatus == true) {
-                            System.out.println((i + 1) + ". " + cars[i].brand + " " + cars[i].model);
-                        }
-
+                        System.out.println((i + 1) + ". "
+                                + cars[i].displayCarDetails());
                     }
-
                 }
 
+                System.out.print("Select Car Number: ");
                 int num = sc.nextInt();
 
                 if (num >= 1 && num <= cars.length) {
 
-                    if (cars[num - 1] != null) {
+                    if (cars[num - 1].checkAvailability()) {
 
-                        if (cars[num - 1].availabilityStatus == true) {
+                        sc.nextLine();
 
-                            booking.bookingID = "B" + num;
-                            booking.carID = cars[num - 1].carID;
-                            booking.customerID = customer.id;
+                        booking.bookingID = "B" + num;
+                        booking.customerID = customer.id;
+                        booking.carID = cars[num - 1].carID;
 
-                            booking.createBooking();
+                        System.out.print("Enter Booking Date: ");
+                        booking.bookingDate = sc.nextLine();
 
-                            cars[num - 1].availabilityStatus = false;
+                        System.out.print("Enter Return Date: ");
+                        booking.returnDate = sc.nextLine();
 
-                            System.out.println("Booked: " + cars[num - 1].brand + " " + cars[num - 1].model);
+                        booking.bookingStatus = "Booked";
 
-                        } else {
-                            System.out.println("Car already booked");
-                        }
+                        booking.createBooking();
 
+                        cars[num - 1].updateAvailability(false);
+
+                        System.out.println("\nCar Booked Successfully");
+                        System.out.println("Booking ID : " + booking.bookingID);
+                        System.out.println("Customer   : " + customer.name);
+                        System.out.println("Car        : "
+                                + cars[num - 1].displayCarDetails());
+
+                    } else {
+                        System.out.println("Car Already Booked");
                     }
 
                 } else {
-                    System.out.println("Wrong number");
+                    System.out.println("Invalid Car Number");
                 }
-
             }
 
             else if (choice == 3) {
 
-                System.out.print("Enter number of days: ");
-                int days = sc.nextInt();
+                System.out.println("\n------ PAYMENT SECTION ------");
+
+                System.out.print("Enter Number of Days: ");
+                days = sc.nextInt();
 
                 double total = 0;
 
                 for (int i = 0; i < cars.length; i++) {
 
-                    if (cars[i] != null) {
+                    if (cars[i].carID.equals(booking.carID)) {
 
-                        if (cars[i].availabilityStatus == false) {
-                            total = cars[i].pricePerDay * days;
-                        }
+                        total = cars[i].pricePerDay * days;
 
+                        payment.paymentID = "P" + i;
+                        payment.bookingID = booking.bookingID;
+                        payment.amount = total;
+
+                        sc.nextLine();
+
+                        System.out.print("Enter Payment Date: ");
+                        payment.paymentDate = sc.nextLine();
+
+                        payment.paymentStatus = "Paid";
+
+                        payment.process();
+
+                        System.out.println("\nPayment Successful");
+                        System.out.println("Payment ID   : " + payment.paymentID);
+                        System.out.println("Booking ID   : " + payment.bookingID);
+                        System.out.println("Amount Paid  : $" + payment.amount);
+
+                        System.out.println(payment.generateInvoice());
                     }
-
                 }
-
-                payment.bookingID = booking.bookingID;
-                payment.amount = total;
-                payment.process();
-
-                record.recordID = "R1";
-                record.bookingID = booking.bookingID;
-                record.totalCost = total;
-
-                System.out.println("Payment done. Total: " + total);
-
             }
 
             else if (choice == 4) {
 
-                System.out.println(record.viewRecord());
-                System.out.println("Total Cost: " + record.totalCost);
+                System.out.println("\n------ RENTAL RECORD ------");
 
+                record.recordID = "R1";
+                record.bookingID = booking.bookingID;
+                record.rentalStartDate = booking.bookingDate;
+                record.rentalEndDate = booking.returnDate;
+
+                for (int i = 0; i < cars.length; i++) {
+
+                    if (cars[i].carID.equals(booking.carID)) {
+
+                        record.totalCost =
+                                record.calculateCost(cars[i].pricePerDay, days);
+                    }
+                }
+
+                record.generateRecord();
+
+                System.out.println("Record ID       : " + record.recordID);
+                System.out.println("Booking ID      : " + record.bookingID);
+                System.out.println("Rental Start    : " + record.rentalStartDate);
+                System.out.println("Rental End      : " + record.rentalEndDate);
+                System.out.println("Total Cost      : $" + record.totalCost);
+
+                System.out.println(record.viewRecord());
+
+                admin.viewRentalRecords();
             }
 
             else if (choice == 5) {
-                System.out.println("Exit");
+
+                sc.nextLine();
+
+                System.out.print("Enter New Booking Date: ");
+                String newDate = sc.nextLine();
+
+                booking.updateBookingDate(newDate);
+
+                System.out.println("Booking Date Updated");
+                System.out.println("New Booking Date : " + booking.bookingDate);
+            }
+
+            else if (choice == 6) {
+
+                booking.cancelBooking();
+
+                for (int i = 0; i < cars.length; i++) {
+
+                    if (cars[i].carID.equals(booking.carID)) {
+
+                        cars[i].updateAvailability(true);
+                    }
+                }
+
+                admin.deleteCar("C3");
+
+                System.out.println("\nBooking Cancelled");
+                System.out.println("Thank You For Using The System");
             }
 
             else {
-                System.out.println("Invalid choice");
-            }
 
+                System.out.println("Invalid Choice");
+            }
         }
     }
 }
