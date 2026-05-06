@@ -12,26 +12,28 @@ public class Main {
         cars[0].carID = "C1";
         cars[0].brand = "Toyota";
         cars[0].model = "Corolla";
-        cars[0].pricePerDay = 50;
+        cars[0].pricePerDay = 5000;
         cars[0].updateAvailability(true);
 
         cars[1] = new Car();
         cars[1].carID = "C2";
         cars[1].brand = "Honda";
         cars[1].model = "Civic";
-        cars[1].pricePerDay = 60;
+        cars[1].pricePerDay = 6000;
         cars[1].updateAvailability(true);
 
         cars[2] = new Car();
         cars[2].carID = "C3";
         cars[2].brand = "Ford";
         cars[2].model = "Focus";
-        cars[2].pricePerDay = 55;
+        cars[2].pricePerDay = 5500;
         cars[2].updateAvailability(true);
 
         Customer customer = new Customer();
 
-        System.out.println("========== CUSTOMER DETAILS ==========");
+        System.out.println("=================================");
+        System.out.println("ENTER CUSTOMER DETAILS");
+        System.out.println("=================================");
 
         System.out.print("Enter Customer ID: ");
         customer.id = sc.nextLine();
@@ -58,6 +60,14 @@ public class Main {
         admin.addCar(cars[0]);
         admin.manageUsers();
 
+        System.out.println("=================================");
+        System.out.println("SYSTEM INITIALIZED");
+        System.out.println("=================================");
+        System.out.println("Admin ID    : " + admin.adminID);
+        System.out.println("Admin Name  : " + admin.name);
+        System.out.println("Cars Loaded : " + cars.length);
+        System.out.println("=================================");
+
         Booking booking = new Booking();
         Payment payment = new Payment();
         RentalRecord record = new RentalRecord();
@@ -65,17 +75,18 @@ public class Main {
         int choice = 0;
         int days = 0;
 
-        while (choice != 6) {
+        while (choice != 7) {
 
-            System.out.println("\n=================================");
+            System.out.println("=================================");
             System.out.println("       CAR RENTAL SYSTEM");
             System.out.println("=================================");
             System.out.println("1. View Available Cars");
             System.out.println("2. Book a Car");
             System.out.println("3. Make Payment");
             System.out.println("4. View Rental Record");
-            System.out.println("5. Update Booking Date");
-            System.out.println("6. Cancel Booking And Exit");
+            System.out.println("5. Modify Booking");
+            System.out.println("6. Cancel Booking");
+            System.out.println("7. Exit");
             System.out.println("=================================");
             System.out.print("Enter Your Choice: ");
 
@@ -83,7 +94,9 @@ public class Main {
 
             if (choice == 1) {
 
-                System.out.println("\n------ AVAILABLE CARS ------");
+                customer.searchCar();
+
+                System.out.println("------ AVAILABLE CARS ------");
 
                 for (int i = 0; i < cars.length; i++) {
 
@@ -91,8 +104,10 @@ public class Main {
 
                         System.out.println("Car Number : " + (i + 1));
                         System.out.println("Car ID     : " + cars[i].carID);
-                        System.out.println("Car Name   : " + cars[i].displayCarDetails());
-                        System.out.println("Price/Day  : $" + cars[i].pricePerDay);
+                        System.out.println("Car Name   : "
+                                + cars[i].displayCarDetails());
+                        System.out.println("Price/Day  : ₹"
+                                + cars[i].pricePerDay);
                         System.out.println("----------------------------");
                     }
                 }
@@ -100,7 +115,7 @@ public class Main {
 
             else if (choice == 2) {
 
-                System.out.println("\n------ BOOK A CAR ------");
+                System.out.println("------ BOOK A CAR ------");
 
                 for (int i = 0; i < cars.length; i++) {
 
@@ -134,26 +149,32 @@ public class Main {
 
                         booking.createBooking();
 
+                        customer.rentCar(booking);
+
                         cars[num - 1].updateAvailability(false);
 
-                        System.out.println("\nCar Booked Successfully");
-                        System.out.println("Booking ID : " + booking.bookingID);
-                        System.out.println("Customer   : " + customer.name);
+                        System.out.println("Car Booked Successfully");
+                        System.out.println("Booking ID : "
+                                + booking.bookingID);
+                        System.out.println("Customer   : "
+                                + customer.name);
                         System.out.println("Car        : "
                                 + cars[num - 1].displayCarDetails());
 
                     } else {
+
                         System.out.println("Car Already Booked");
                     }
 
                 } else {
+
                     System.out.println("Invalid Car Number");
                 }
             }
 
             else if (choice == 3) {
 
-                System.out.println("\n------ PAYMENT SECTION ------");
+                System.out.println("------ PAYMENT SECTION ------");
 
                 System.out.print("Enter Number of Days: ");
                 days = sc.nextInt();
@@ -179,10 +200,13 @@ public class Main {
 
                         payment.process();
 
-                        System.out.println("\nPayment Successful");
-                        System.out.println("Payment ID   : " + payment.paymentID);
-                        System.out.println("Booking ID   : " + payment.bookingID);
-                        System.out.println("Amount Paid  : $" + payment.amount);
+                        System.out.println("Payment Successful");
+                        System.out.println("Payment ID   : "
+                                + payment.paymentID);
+                        System.out.println("Booking ID   : "
+                                + payment.bookingID);
+                        System.out.println("Amount Paid  : ₹"
+                                + payment.amount);
 
                         System.out.println(payment.generateInvoice());
                     }
@@ -191,7 +215,7 @@ public class Main {
 
             else if (choice == 4) {
 
-                System.out.println("\n------ RENTAL RECORD ------");
+                System.out.println("------ RENTAL RECORD ------");
 
                 record.recordID = "R1";
                 record.bookingID = booking.bookingID;
@@ -203,17 +227,23 @@ public class Main {
                     if (cars[i].carID.equals(booking.carID)) {
 
                         record.totalCost =
-                                record.calculateCost(cars[i].pricePerDay, days);
+                                record.calculateCost(
+                                        cars[i].pricePerDay, days);
                     }
                 }
 
                 record.generateRecord();
 
-                System.out.println("Record ID       : " + record.recordID);
-                System.out.println("Booking ID      : " + record.bookingID);
-                System.out.println("Rental Start    : " + record.rentalStartDate);
-                System.out.println("Rental End      : " + record.rentalEndDate);
-                System.out.println("Total Cost      : $" + record.totalCost);
+                System.out.println("Record ID       : "
+                        + record.recordID);
+                System.out.println("Booking ID      : "
+                        + record.bookingID);
+                System.out.println("Rental Start    : "
+                        + record.rentalStartDate);
+                System.out.println("Rental End      : "
+                        + record.rentalEndDate);
+                System.out.println("Total Cost      : ₹"
+                        + record.totalCost);
 
                 System.out.println(record.viewRecord());
 
@@ -229,13 +259,16 @@ public class Main {
 
                 booking.updateBookingDate(newDate);
 
-                System.out.println("Booking Date Updated");
-                System.out.println("New Booking Date : " + booking.bookingDate);
+                System.out.println("Booking Updated Successfully");
+                System.out.println("New Booking Date : "
+                        + booking.bookingDate);
             }
 
             else if (choice == 6) {
 
                 booking.cancelBooking();
+
+                customer.returnCar(booking);
 
                 for (int i = 0; i < cars.length; i++) {
 
@@ -247,7 +280,11 @@ public class Main {
 
                 admin.deleteCar("C3");
 
-                System.out.println("\nBooking Cancelled");
+                System.out.println("Booking Cancelled Successfully");
+            }
+
+            else if (choice == 7) {
+
                 System.out.println("Thank You For Using The System");
             }
 

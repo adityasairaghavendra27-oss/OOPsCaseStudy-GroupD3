@@ -1,19 +1,28 @@
 class Admin extends User {
+
     String adminID;
 
     void addCar(Car car) {
-        System.out.println("Car added: " + car.model);
+
+        String addedCar = car.brand + " " + car.model;
+
     }
 
     void deleteCar(String carID) {
-        System.out.println("Car deleted: " + carID);
+
+        String deletedCar = carID;
+
     }
 
     void manageUsers() {
-        System.out.println("Managing users");
+
+        int totalUsers = 1;
+
     }
 
     void viewRentalRecords() {
-        System.out.println("Viewing rental records");
+
+        String status = "Viewing Rental Records";
+
     }
 }
