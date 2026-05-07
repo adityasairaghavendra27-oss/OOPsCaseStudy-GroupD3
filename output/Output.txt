@@ -1,0 +1,153 @@
+=================================
+ENTER CUSTOMER DETAILS
+=================================
+Enter Customer ID: A231
+Enter Customer Name: Aditya
+Enter Email: Aditya@gmail.com
+Enter Phone Number: 7013680223
+Enter License Number: A23d23W
+=================================
+SYSTEM INITIALIZED
+=================================
+Admin ID    : AD101
+Admin Name  : System Admin
+Cars Loaded : 3
+=================================
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 1
+Searching cars
+------ AVAILABLE CARS ------
+Car Number : 1
+Car ID     : C1
+Car Name   : Toyota Corolla
+Price/Day  : ₹5000.0
+----------------------------
+Car Number : 2
+Car ID     : C2
+Car Name   : Honda Civic
+Price/Day  : ₹6000.0
+----------------------------
+Car Number : 3
+Car ID     : C3
+Car Name   : Ford Focus
+Price/Day  : ₹5500.0
+----------------------------
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 2
+------ BOOK A CAR ------
+1. Toyota Corolla
+2. Honda Civic
+3. Ford Focus
+Select Car Number: 1
+Enter Booking Date: 09-12-2025
+Enter Return Date: 1-12-2026
+Booking created
+Renting car with booking B1
+Car Booked Successfully
+Booking ID : B1
+Customer   : Aditya
+Car        : Toyota Corolla
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 3
+------ PAYMENT SECTION ------
+Enter Number of Days: 23
+Enter Payment Date: 09-12-2025
+Processing payment of 115000.0
+Payment Successful
+Payment ID   : P0
+Booking ID   : B1
+Amount Paid  : ₹115000.0
+Invoice for booking B1
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 5
+Enter New Booking Date: 12-09-2025
+Booking Updated Successfully
+New Booking Date : 12-09-2025
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 4
+------ RENTAL RECORD ------
+Record generated
+Record ID       : R1
+Booking ID      : B1
+Rental Start    : 12-09-2025
+Rental End      : 1-12-2026
+Total Cost      : ₹115000.0
+Record ID: R1
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 6
+Booking cancelled
+Returning car C1
+Booking Cancelled Successfully
+=================================
+       CAR RENTAL SYSTEM
+=================================
+1. View Available Cars
+2. Book a Car
+3. Make Payment
+4. View Rental Record
+5. Modify Booking
+6. Cancel Booking
+7. Exit
+=================================
+Enter Your Choice: 7
+Thank You For Using The System
