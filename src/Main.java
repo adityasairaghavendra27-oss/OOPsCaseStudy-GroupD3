@@ -55,7 +55,7 @@ public class Main {
         admin.id = "A1";
         admin.name = "System Admin";
         admin.email = "admin@gmail.com";
-        admin.adminID = "AD101";
+        admin.id = "AD101";
 
         admin.addCar(cars[0]);
         admin.manageUsers();
@@ -63,7 +63,7 @@ public class Main {
         System.out.println("=================================");
         System.out.println("SYSTEM INITIALIZED");
         System.out.println("=================================");
-        System.out.println("Admin ID    : " + admin.adminID);
+        System.out.println("Admin ID    : " + admin.id);
         System.out.println("Admin Name  : " + admin.name);
         System.out.println("Cars Loaded : " + cars.length);
         System.out.println("=================================");
@@ -234,16 +234,11 @@ public class Main {
 
                 record.generateRecord();
 
-                System.out.println("Record ID       : "
-                        + record.recordID);
-                System.out.println("Booking ID      : "
-                        + record.bookingID);
-                System.out.println("Rental Start    : "
-                        + record.rentalStartDate);
-                System.out.println("Rental End      : "
-                        + record.rentalEndDate);
-                System.out.println("Total Cost      : ₹"
-                        + record.totalCost);
+                System.out.println("Record ID       : " + record.recordID);
+                System.out.println("Booking ID      : " + record.bookingID);
+                System.out.println("Rental Start    : " + record.rentalStartDate);
+                System.out.println("Rental End      : " + record.rentalEndDate);
+                System.out.println("Total Cost      : ₹"+ record.totalCost);
 
                 System.out.println(record.viewRecord());
 

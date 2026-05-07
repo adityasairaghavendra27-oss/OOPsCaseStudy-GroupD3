@@ -1,7 +1,5 @@
 class Admin extends User {
 
-    String adminID;
-
     void addCar(Car car) {
 
         String addedCar = car.brand + " " + car.model;
